@@ -17,22 +17,24 @@ Maintain a hash map (`unordered_map` in C++) that at every iteration records the
 
 Whenever we encounter a current number that matches an existing key in the hash map, we know a pair of two-sum has been found. Then, we can return the existing key's matching value (which is the index of the first number of the two-sum) and the current index (the index of the second number of the two-sum).
 
-## My C++ Solution:
+## Brute force: 
 
-```cpp
-class Solution {
- public:
-  vector<int> twoSum(vector<int> &nums, int t) {
-    unordered_map<int, int> seen;
-    int n = (int)nums.size();
-    for (int i = 0; i < n; ++i) {
-      if (seen.find(nums[i]) != seen.end()) {
-        return {seen[nums[i]], i};
-      } else {
-        seen.insert({t - nums[i], i});
-      }
-    }
-    return {-1, -1};  // error, not found
-  }
-};
+Brute force method checks for every pair of elements in the array whether there is a pair that sums up to the target number. It checks for every element i in the array whether there is an element j in the rest of the array where i < j such that i+j=target.
+
+## Time Complexity
+
+The time complexity is O(n) because it traverses the array once and uses the hash map to check whether a target is found. Searching a key in the hash map (dictionary) only requires O(1), which is faster than the search time in brute force by iterating through the array another time.
+
+## My Python Solution:
+```
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        complement = {}
+        for i in range(len(nums)):
+            complem = target - nums[i]
+            if complem in complement:
+                return [i, complement[complem]]
+            complement[nums[i]] = i
+        
+        return -1
 ```
