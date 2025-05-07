@@ -26,7 +26,7 @@ Brute force method checks for every pair of elements in the array whether there 
 The time complexity is O(n) because it traverses the array once and uses the hash map to check whether a target is found. Searching a key in the hash map (dictionary) only requires O(1), which is faster than the search time in brute force by iterating through the array another time.
 
 ## My Python Solution:
-```
+```python
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         complement = {}
